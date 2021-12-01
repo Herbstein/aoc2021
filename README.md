@@ -16,6 +16,8 @@ Using the benchmarks associated with this repository is a fool's errand. They're
 
 ## Day 1 - Sonar Sweep
 
+Read this more easily at https://herbstein.github.io/aoc2021/.
+
 As usual Advent of Code starts off with an easy challenge. But that's not to say there aren't performance pitfalls abound.
 
 ### Parsing input
