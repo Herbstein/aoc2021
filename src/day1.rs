@@ -10,8 +10,30 @@ pub fn parse(input: &str) -> Vec<usize> {
 pub fn solve_part1(input: &[usize]) -> usize {
     input
         .windows(2)
-        .map(|window| if window[0] < window[1] { 1 } else { 0 })
-        .sum()
+        .filter(|window| window[0] < window[1])
+        .count()
+}
+
+#[aoc(day1, part1, forr)]
+pub fn solve_part1_for(input: &[usize]) -> usize {
+    let mut count = 0;
+    for i in 0..input.len() - 1 {
+        if input[i] < input[i + 1] {
+            count += 1;
+        }
+    }
+    count
+}
+
+#[aoc(day1, part1, for_rev)]
+pub fn solve_part1_for_rev(input: &[usize]) -> usize {
+    let mut count = 0;
+    for i in 0..input.len() - 1 {
+        if input[i + 1] > input[i] {
+            count += 1;
+        }
+    }
+    count
 }
 
 #[aoc(day1, part2)]
@@ -32,4 +54,25 @@ pub fn solve_part2_std(input: &[usize]) -> usize {
     }
 
     solve_part1(&window_sums)
+}
+
+#[aoc(day1, part2, comparison)]
+pub fn solve_part2_comparison(input: &[usize]) -> usize {
+    input
+        .iter()
+        .zip(input.iter().skip(3))
+        .map(|(prev, next)| if prev < next { 1 } else { 0 })
+        .sum()
+}
+
+#[aoc(day1, part2, comparison_std)]
+pub fn solve_part2_comparison_std(input: &[usize]) -> usize {
+    let mut count = 0;
+    for i in 0..input.len() - 3 {
+        if input[i] < input[i + 3] {
+            count += 1;
+        }
+    }
+
+    count
 }
