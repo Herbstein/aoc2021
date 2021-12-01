@@ -1,4 +1,8 @@
-# Table of Contents
+# Advent of Code - An exercise in unnecessary micro-optimizations and benchmarking
+
+In this series of posts I'll be letting loose my inner freshman. Nothing but micro-benchmarks of tiny amounts of code, unnecessary peeks at x86 assembly, and conclusions said with just a hint of too much confidence. Follow along to discover just how big of a relative difference very small code changes can give you, and how little those absolutely tiny differences really don't make much of an impact wall-clock performance.
+
+# The Days
 
 1. [Day 1 - Sonar Sweep](#d1)
    1. [Part 1](#d1p1)
