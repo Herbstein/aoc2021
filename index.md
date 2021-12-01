@@ -69,11 +69,11 @@ This gives a speedup of over 40% and brings the loop-based implementation comple
 
 And finally, a handy comparison table for part 1.
 
-| function                      | runtime (ns) | Comparison (%) |
-| ----------------------------- | ------------ | -------------- |
-| iterators                     | 474.70 ns    | 100%           |
-| loop-based                    | 845.12 ns    | 178%           |
-| reverse comparison loop-based | 473.28 ns    | 100%           |
+| function           | runtime (ns) | Comparison (%) |
+| ------------------ | ------------ | -------------- |
+| iterators          | 474.70 ns    | 100%           |
+| loop_based         | 845.12 ns    | 178%           |
+| reverse_loop_based | 473.28 ns    | 100%           |
 
 ## Part 2 <a name="d1p2"></a>
 
