@@ -1,4 +1,10 @@
-# Day 1 - Sonar Sweep
+# Table of Contents
+
+1. [Day 1 - Sonar Sweep](#d1)
+   1. [Part 1](#d1p1)
+   2. [Part 2](#d1p2)
+
+# Day 1 - Sonar Sweep <a name="d1"></a>
 
 As usual Advent of Code starts off with an easy challenge. But that's not to say there aren't performance pitfalls abound.
 
@@ -14,7 +20,7 @@ pub fn parse(input: &str) -> Vec<usize> {
 
 Using `.flat_map` with a closure that returns a `Result<usize, _>` silently ignores the parsing errors that might be encountered. Since the AOC input is well-formed and known this doesn't bother me much. I return an allocated vector of pointer-sized unsized integers, and each solution borrows the vector as a slice.
 
-## Part 1
+## Part 1 <a name="d1p1"></a>
 
 The first part wants us to compare each pair of subsequent numbers in a slice. This kind of sliding view is called a _window_, and for slices in Rust a convenient method called exactly that exists. We simply get a sliding window of size 2, and count the ones where the second element is larger than the first.
 
@@ -65,7 +71,7 @@ And finally, a handy comparison table for part 1.
 | loop-based                    | 845.12 ns    |
 | reverse comparison loop-based | 473.28 ns    |
 
-## Part 2
+## Part 2 <a name="d1p2"></a>
 
 As with most Advent of Code second-parts, the solution to day 1 part 2 is annoyingly close to part 1, but also has a devious twist. It's a test of your refactoring skills or your ability to write a general solution ready for changing conditions. The second part to day 1 wants you to figure out whether the sum of adjacent windows of size 3 are increasing or decreasing, and to count the number of increases. That is, in the list `[a, b, c, d, e]` we should check whether `a + b + c < b + c + d`, `b + c + d < c + d + e`, and so forth.
 
