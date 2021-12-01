@@ -69,11 +69,11 @@ This gives a speedup of over 40% and brings the loop-based implementation comple
 
 And finally, a handy comparison table for part 1.
 
-| function                      | runtime (ns) |
-| ----------------------------- | ------------ |
-| iterators                     | 474.70 ns    |
-| loop-based                    | 845.12 ns    |
-| reverse comparison loop-based | 473.28 ns    |
+| function                      | runtime (ns) | Comparison (%) |
+| ----------------------------- | ------------ | -------------- |
+| iterators                     | 474.70 ns    | 100%           |
+| loop-based                    | 845.12 ns    | 178%           |
+| reverse comparison loop-based | 473.28 ns    | 100%           |
 
 ## Part 2 <a name="d1p2"></a>
 
@@ -178,11 +178,11 @@ Unfortunately, while this does produce assembly that looks close to that of the 
 
 And finally, here's the full comparison of all the implementations.
 
-| function           | runtime (us) |
-| ------------------ | ------------ |
-| iterators          | 5.8372 us    |
-| std_alloc          | 4.5266 us    |
-| cmp_iterators      | 1.9049 us    |
-| cmp_for            | 0.9506 us    |
-| cmp_for_rev        | 0.5240 us    |
-| cmp_for_rev_unsafe | 0.7064 us    |
+| function           | runtime (us) | Comparison(%) |
+| ------------------ | ------------ | ------------- |
+| iterators          | 5.8372 us    | 100%          |
+| std_alloc          | 4.5266 us    | 78%           |
+| cmp_iterators      | 1.9049 us    | 33%           |
+| cmp_for            | 0.9506 us    | 16%           |
+| cmp_for_rev_unsafe | 0.7064 us    | 12%           |
+| cmp_for_rev        | 0.5240 us    | 9%            |
