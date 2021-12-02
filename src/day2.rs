@@ -1,4 +1,4 @@
-use std::{convert::Infallible, str::FromStr};
+use std::str::FromStr;
 
 use aoc_runner_derive::{aoc, aoc_generator};
 
@@ -34,39 +34,7 @@ pub struct Position {
 }
 
 impl Position {
-    pub fn update_part1(self, instruction: &Instruction) -> Self {
-        match instruction.direction {
-            Direction::Forward => Self {
-                horizontal: self.horizontal + instruction.units,
-                ..self
-            },
-            Direction::Down => Self {
-                vertical: self.vertical + instruction.units,
-                ..self
-            },
-            Direction::Up => Self {
-                vertical: self.vertical - instruction.units,
-                ..self
-            },
-        }
-    }
-
-    pub fn update_part1_mut(&mut self, instruction: &Instruction) {
-        match instruction.direction {
-            Direction::Forward => {
-                self.horizontal += instruction.units;
-                self.vertical += self.aim * instruction.units;
-            }
-            Direction::Down => {
-                self.aim += instruction.units;
-            }
-            Direction::Up => {
-                self.aim -= instruction.units;
-            }
-        }
-    }
-
-    pub fn update_part2(self, instruction: &Instruction) -> Self {
+    pub fn update(self, instruction: &Instruction) -> Self {
         match instruction.direction {
             Direction::Forward => Self {
                 horizontal: self.horizontal + instruction.units,
@@ -84,7 +52,26 @@ impl Position {
         }
     }
 
-    pub fn into_result(self) -> usize {
+    pub fn update_mut(&mut self, instruction: &Instruction) {
+        match instruction.direction {
+            Direction::Forward => {
+                self.horizontal += instruction.units;
+                self.vertical += self.aim * instruction.units;
+            }
+            Direction::Down => {
+                self.aim += instruction.units;
+            }
+            Direction::Up => {
+                self.aim -= instruction.units;
+            }
+        }
+    }
+
+    pub fn into_part1_result(self) -> usize {
+        self.horizontal * self.aim
+    }
+
+    pub fn into_part2_result(self) -> usize {
         self.horizontal * self.vertical
     }
 }
@@ -123,8 +110,8 @@ pub fn parse(input: &str) -> Vec<Instruction> {
 pub fn solve_part1(instructions: &[Instruction]) -> usize {
     instructions
         .iter()
-        .fold(Position::default(), Position::update_part1)
-        .into_result()
+        .fold(Position::default(), Position::update)
+        .into_part1_result()
 }
 
 #[aoc(day2, part1, mutable)]
@@ -132,16 +119,27 @@ pub fn solve_part1_mut(instructions: &[Instruction]) -> usize {
     let mut state = Position::default();
 
     for i in instructions {
-        state.update_part1_mut(i);
+        state.update_mut(i);
     }
 
-    state.into_result()
+    state.into_part1_result()
 }
 
 #[aoc(day2, part2)]
 pub fn solve_part2(instructions: &[Instruction]) -> usize {
     instructions
         .iter()
-        .fold(Position::default(), Position::update_part2)
-        .into_result()
+        .fold(Position::default(), Position::update)
+        .into_part2_result()
+}
+
+#[aoc(day2, part2, mutable)]
+pub fn solve_part2_mut(instructions: &[Instruction]) -> usize {
+    let mut state = Position::default();
+
+    for i in instructions {
+        state.update_mut(i);
+    }
+
+    state.into_part2_result()
 }
