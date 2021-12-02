@@ -1,6 +1,10 @@
 use aoc_runner_derive::{aoc, aoc_generator};
 use itertools::Itertools;
 
+// fn solve(input: impl IntoIterator<Item = usize>) -> usize {
+//     let iter = input.into_iter();
+// }
+
 #[aoc_generator(day1)]
 pub fn parse(input: &str) -> Vec<usize> {
     input.lines().flat_map(|s| s.parse::<usize>()).collect()
@@ -12,17 +16,6 @@ pub fn solve_part1(input: &[usize]) -> usize {
         .windows(2)
         .filter(|window| window[0] < window[1])
         .count()
-}
-
-#[aoc(day1, part1, forr)]
-pub fn solve_part1_for(input: &[usize]) -> usize {
-    let mut count = 0;
-    for i in 0..input.len() - 1 {
-        if input[i] < input[i + 1] {
-            count += 1;
-        }
-    }
-    count
 }
 
 #[aoc(day1, part1, for_rev)]
@@ -65,12 +58,38 @@ pub fn solve_part2_comparison(input: &[usize]) -> usize {
         .sum()
 }
 
-#[aoc(day1, part2, comparison_std)]
-pub fn solve_part2_comparison_std(input: &[usize]) -> usize {
+#[aoc(day1, part2, comparison_for)]
+pub fn solve_part2_comparison_for(input: &[usize]) -> usize {
     let mut count = 0;
     for i in 0..input.len() - 3 {
         if input[i] < input[i + 3] {
             count += 1;
+        }
+    }
+
+    count
+}
+
+#[aoc(day1, part2, comparison_for_rev)]
+pub fn solve_part2_comparison_for_rev(input: &[usize]) -> usize {
+    let mut count = 0;
+    for i in 0..input.len() - 3 {
+        if input[i + 3] > input[i] {
+            count += 1;
+        }
+    }
+
+    count
+}
+
+#[aoc(day1, part2, comparison_for_rev_unsafe)]
+pub fn solve_part2_comparison_for_rev_unsafe(input: &[usize]) -> usize {
+    let mut count = 0;
+    for i in 0..input.len() - 3 {
+        unsafe {
+            if input.get_unchecked(i + 3) > input.get_unchecked(i) {
+                count += 1;
+            }
         }
     }
 
